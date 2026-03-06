@@ -688,7 +688,7 @@
     <div class="hero">
       <div class="hero-tag">📚 Homework Assignment</div>
       <h1>Task 1: <span>Library Database</span> Design</h1>
-      <p class="hero-sub">Design, build, and query a complete PostgreSQL library database from scratch.</p>
+      <!-- <p class="hero-sub">Design, build, and query a complete PostgreSQL library database from scratch.</p> -->
       <div class="hero-meta">
         <span>📅 Week 7</span>
         <span>🎯 Required</span>
@@ -724,14 +724,7 @@
         <div class="section-num">1</div>
         <h2>Create the Database &amp; Tables</h2>
       </div>
-
-      <p>In pgAdmin 4: right-click <strong>Databases → Create → Database</strong> and name it <code>library_db</code>.
-        Then open the Query Tool and run each CREATE TABLE below.</p>
-
-      <div class="note"><span class="note-icon">💡</span><span>Create tables in this order: <strong>books</strong> and
-          <strong>members</strong> first, then <strong>borrowings</strong> — because <code>borrowings</code> references
-          both via <code>FOREIGN KEY</code>.</span></div>
-
+      <!-- 
       <!-- books -->
       <div class="step">
         <div class="step-dot"></div>
@@ -753,39 +746,6 @@
     available_copies <span class="fn">INTEGER</span>       <span class="kw">DEFAULT</span> <span class="num">1</span>
                                    <span class="kw">CHECK</span> (available_copies <span class="op">&gt;=</span> <span class="num">0</span>)
 );</pre>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Column</th>
-              <th>Constraint</th>
-              <th>Purpose</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>book_id</td>
-              <td>SERIAL PRIMARY KEY</td>
-              <td>Auto-generated unique ID for each book</td>
-            </tr>
-            <tr>
-              <td>isbn</td>
-              <td>UNIQUE NOT NULL</td>
-              <td>Each book has a unique ISBN; must be provided</td>
-            </tr>
-            <tr>
-              <td>publication_year</td>
-              <td>CHECK &gt; 1000</td>
-              <td>Rejects obviously wrong year values</td>
-            </tr>
-            <tr>
-              <td>available_copies</td>
-              <td>CHECK &gt;= 0</td>
-              <td>Stock can never be negative</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
       <!-- members -->
@@ -909,8 +869,6 @@
         <div class="section-num">3</div>
         <h2>Insert Sample Data</h2>
       </div>
-      <div class="warn"><span class="warn-icon">⚠️</span><span>Always insert <code>books</code> and <code>members</code>
-          <strong>before</strong> <code>borrowings</code>. Foreign keys require parent rows to exist first.</span></div>
 
       <div class="step">
         <div class="step-dot"></div>
@@ -984,7 +942,6 @@
         <div class="section-num">4</div>
         <h2>Required Queries</h2>
       </div>
-      <p>Write and run each query in pgAdmin. Attach results or a screenshot with your submission.</p>
 
       <!-- Q1 -->
       <div class="query-card">
@@ -1128,46 +1085,6 @@
         </div>
       </div>
     </div>
-
-    <!-- PART 5: MISTAKES -->
-    <!-- <div class="section">
-    <div class="section-header">
-      <div class="section-num">5</div>
-      <h2>Common Mistakes to Avoid</h2>
-    </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>❌ Mistake</th><th>✅ Correct Approach</th></tr></thead>
-        <tbody>
-          <tr class="mistake-row"><td>Insert into <code>borrowings</code> before books/members exist</td><td>Always insert parent rows first — FOREIGN KEY will reject the insert otherwise</td></tr>
-          <tr class="mistake-row"><td><code>WHERE COUNT(...) &gt; 2</code> (aggregate in WHERE)</td><td>Use <code>HAVING</code> for aggregate conditions; WHERE runs before grouping</td></tr>
-          <tr class="mistake-row"><td>UPDATE without WHERE clause</td><td>Always include WHERE; without it <strong>every row</strong> is updated</td></tr>
-          <tr class="mistake-row"><td><code>return_date = NULL</code></td><td>Use <code>IS NULL</code> — the <code>=</code> operator always returns FALSE for NULL</td></tr>
-          <tr class="mistake-row"><td>Forgetting <code>ON DELETE CASCADE</code></td><td>Without it, deleting a member or book raises a foreign key error</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div> -->
-
-    <!-- CHECKLIST -->
-    <!-- <div class="section">
-    <div class="section-header">
-      <div class="section-num">✓</div>
-      <h2>Submission Checklist</h2>
-    </div>
-    <ul class="checklist">
-      <li><div class="checkbox"></div>Created the <code>library_db</code> database in PostgreSQL</li>
-      <li><div class="checkbox"></div>Created the <code>books</code> table with all columns and constraints</li>
-      <li><div class="checkbox"></div>Created the <code>members</code> table with all columns</li>
-      <li><div class="checkbox"></div>Created the <code>borrowings</code> table with correct FOREIGN KEY references</li>
-      <li><div class="checkbox"></div>Inserted at least 10 books, 5 members, and 8 borrowing records</li>
-      <li><div class="checkbox"></div>Query 1 — Currently borrowed books runs correctly</li>
-      <li><div class="checkbox"></div>Query 2 — Overdue books uses CURRENT_DATE comparison</li>
-      <li><div class="checkbox"></div>Query 3 — LEFT JOIN correctly finds members with no borrowings</li>
-      <li><div class="checkbox"></div>Query 4 — GROUP BY and COUNT show total per member</li>
-      <li><div class="checkbox"></div>Query 5 — Books ranked by borrow frequency</li>
-    </ul>
-  </div> -->
 
     <div class="footer">
       <p>Prepared by <strong>Mr. SEA Solin</strong> &nbsp;·&nbsp; Week 7: Introduction to Databases and SQL
